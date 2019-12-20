@@ -86,7 +86,7 @@ print("Writing features.. ")
 wt_file = open('features.category', 'w')
 
 for i in range(11591):
-    for j in range(11):
+    for j in range(2):
         wt = weights[i][0][j]
         wt_file.write('{wt} '.format(wt = wt))
     wt_file.write('\n')

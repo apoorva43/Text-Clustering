@@ -26,9 +26,9 @@ class autoencoder(nn.Module):
             nn.ReLU(True), 
             nn.Linear(1000, 100), 
             nn.ReLU(True), 
-            nn.Linear(100, 11))
+            nn.Linear(100, 2))
         self.decoder = nn.Sequential(
-            nn.Linear(11, 100),
+            nn.Linear(2, 100),
             nn.ReLU(True),
             nn.Linear(100, 1000),
             nn.ReLU(True),
@@ -74,7 +74,7 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
         # write weights for last epoch
-        if epoch == 9:
+        if epoch == (num_epochs - 1):
             tensor_ = model.get_features(d.float())
             array = tensor_.cpu().detach().numpy()
             weights.append(array)

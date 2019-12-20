@@ -24,8 +24,13 @@ def clean_data():
     
     for i in range(len(old_category)):
         string = old_category[i].strip().split(',')
-        if count_[string[0]] < 200: # club sparse classes
+        # club sparse classes
+        if count_[string[0]] < 200 or count_[string[0]] == 346: 
             new_category[i] = 'Others'
+        elif count_[string[0]] < 330:
+            new_category[i] = 'Ogling/Facial Expressions/Staring'
+        elif count_[string[0]] == 585 or count_[string[0]] == 462:
+            new_category[i] = 'Rape / Sexual Assault'
         else:
             new_category[i] = string[0]
     
@@ -38,6 +43,6 @@ data_new = {'DESCRIPTION': comment, 'CATEGORY': new_category}
 # new dataframe
 data_new_df = pd.DataFrame(data_new)
 # print(data_new_df.head())
-# print(data_new_df['CATEGORY'].value_counts())
+print(data_new_df['CATEGORY'].value_counts())
 # write to new csv file
 data_new_df.to_csv('category.csv') 

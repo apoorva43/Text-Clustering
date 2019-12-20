@@ -43,6 +43,6 @@ data_new = {'DESCRIPTION': comment, 'CATEGORY': new_category}
 # new dataframe
 data_new_df = pd.DataFrame(data_new)
 # print(data_new_df.head())
-print(data_new_df['CATEGORY'].value_counts())
+# print(data_new_df['CATEGORY'].value_counts())
 # write to new csv file
 data_new_df.to_csv('category.csv') 

@@ -53,27 +53,26 @@ del X_np # RAM constraints
 print("Training..")
 conv1 = conv2d(X, weight_conv1.double().cuda(), 2) # convolution
 conv1 = conv1.view(-1, 5) 
-print(type(conv1)) 
+
 conv2 = torch.nn.functional.relu(conv1.double().cuda() + bias_conv1.double().cuda()) # apply ReLU
 del X
 del conv1 
-print(conv2.shape)
+
 conv2 = conv2d(conv2.view(-1, 5, 50, 50), weight_conv2.double().cuda(), 2) # convolution 
 conv2 = conv2.view(-1, 10)
 fc = torch.nn.functional.relu(conv2.double().cuda() + bias_conv2.double().cuda()) # apply ReLU
 del conv2
+
 fc = fc.view(11591, -1)
-print(fc.shape)
 fc = torch.mm(fc.cuda(), weight_fc.double().t().cuda())
 fc = torch.nn.functional.relu(fc.double().cuda() + bias_fc.double().cuda()) 
 y = torch.addmm(bias_out.double().cuda(), fc.double().cuda(), weight_out.double().t().cuda()) # linear
 del fc
-print(y.shape)
 weights = y.detach().cpu().numpy()
-print(weights.shape)
+
 
 print("Writing features.. ")
-wt_file = open('features_cnn.category', 'w')
+wt_file = open('features.category', 'w')
 
 for i in range(11591):
     for j in range(2):

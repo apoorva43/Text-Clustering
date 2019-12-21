@@ -1,4 +1,4 @@
-''' Code to train the CNN for feature representation '''
+''' Code to train the Convolutional Neural Network for feature representation '''
 
 import pandas as pd
 import numpy as np
@@ -50,10 +50,8 @@ X = X_np.view(-1, 1, 100, 100)
 X = X.double()
 del X_np # RAM constraints 
 
-print("Training..")
 conv1 = conv2d(X, weight_conv1.double().cuda(), 2) # convolution
 conv1 = conv1.view(-1, 5) 
-
 conv2 = torch.nn.functional.relu(conv1.double().cuda() + bias_conv1.double().cuda()) # apply ReLU
 del X
 del conv1 
